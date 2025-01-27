@@ -1,11 +1,13 @@
-# Trilium Sender
-Trilium Sender is a simple Android application for sending images and notes to [Trilium](https://github.com/zadam/trilium).
+# Trilium Reading List Sender
+Trilium Reading List Sender is a simple Android application for adding books, 
+articles, etc. to lists written on [TriliumNext Notes](https://github.com/TriliumNext/notes).
 
-It's not a full Android port of Trilium and it's not meant to be one - instead it's supposed to cover only following use cases:
+Lists cannot be viewed. This app only appends new items to your lists.
 
-* write plain text notes and send them to Trilium
-* send images (photos) to Trilium
+If you want to access your lists on mobile, you can use TriliumNext's 
+[mobile frontend](https://triliumnext.github.io/Docs/Wiki/mobile-frontend.html).
 
-Specifically, this app doesn't support reading or modifying existing notes, it's "write-only". If you need to access your notes in the mobile phone, you can use Trilium's [mobile frontend](https://github.com/zadam/trilium/wiki/Mobile-frontend).
+Notes containing new list bullet points will be saved under your "day note" on your
+TriliumNext server.
 
-Both notes and images are saved as new notes under "day note" in Trilium server.
+Based on [@zadam](https://github.com/zadam)'s [trilium-sender](https://github.com/TriliumNext/trilium-sender).

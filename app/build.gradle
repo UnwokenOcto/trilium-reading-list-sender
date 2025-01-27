@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
-def keystorePropertiesFile = rootProject.file("../../keys/keystore.properties")
+def keystorePropertiesFile = rootProject.file("keystore.properties")
 
 // Initialize a new Properties() object called keystoreProperties.
 def keystoreProperties = new Properties()
@@ -25,11 +25,11 @@ android {
     }
     compileSdkVersion 34
     defaultConfig {
-        applicationId "io.github.zadam.triliumsender"
+        applicationId "io.github.unwokenocto.triliumlistsender"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 3
-        versionName "0.3"
+        versionCode 1
+        versionName '0.1'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -39,7 +39,7 @@ android {
         }
     }
     buildToolsVersion '33.0.2'
-    namespace 'io.github.zadam.triliumsender'
+    namespace 'io.github.unwokenocto.triliumlistsender'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

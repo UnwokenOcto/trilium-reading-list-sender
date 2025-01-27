@@ -1,9 +1,9 @@
-package io.github.zadam.triliumsender
+package io.github.unwokenocto.triliumlistsender
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import io.github.zadam.triliumsender.services.TriliumSettings
+import io.github.unwokenocto.triliumlistsender.services.TriliumSettings
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 

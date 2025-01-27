@@ -1,3 +1,7 @@
+# Other files
+keystore.properties
+local.properties
+
 # Built application files
 *.apk
 *.ap_

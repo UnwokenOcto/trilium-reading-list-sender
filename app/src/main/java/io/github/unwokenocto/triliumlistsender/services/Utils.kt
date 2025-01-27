@@ -1,4 +1,4 @@
-package io.github.zadam.triliumsender.services
+package io.github.unwokenocto.triliumlistsender.services
 
 import android.annotation.SuppressLint
 import okhttp3.MediaType.Companion.toMediaType

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trilium Sender</string>
+    <string name="app_name">Trilium Reading List Sender</string>
     <string name="prompt_trilium_address">https://trilium_host:8080</string>
     <string name="prompt_username">User name</string>
     <string name="prompt_password">Password</string>
@@ -11,17 +11,22 @@
     <string name="error_incorrect_credentials">Entered credentials are incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="trilium_connection_settings">Settings</string>
-    <string name="note_title">Note title</string>
-    <string name="note_text">Note text</string>
+    <string name="checkbox_include_url">Include URL</string>
+    <string name="checkbox_already_read">Already Read</string>
+    <string name="item_list">List</string>
+    <string name="item_sublist">Sublist</string>
+    <string name="item_link">URL</string>
+    <string name="item_title">Title</string>
+    <string name="item_author">Author and/or notes</string>
     <string name="setup_not_complete">Trilium connection setup isn\'t finished yet.</string>
     <string name="setup_is_complete">Trilium connection has been set up for address: %s. You can still change it by tapping the button below.</string>
-    <string name="please_use_other_shortcut">Please note that this view is used only for setup. For new notes, use the second \'Add note\' app shortcut installed with Trilium Sender. To add images, you need to share it to \'Trilium Sender\' from gallery app.</string>
+    <string name="please_use_other_shortcut">Please note that this view is used only for setup. For adding items to lists, use the second \'Add to List\' app shortcut installed with Trilium Reading List Sender. To add files, you need to share it to \'Trilium Reading List Sender\'.</string>
     <string name="url_invalid">URL is invalid.</string>
     <string name="connection_configured_correctly">Trilium connection settings have been successfully configured.</string>
-    <string name="sender_not_configured_image">Trilium Sender is not configured. Can\'t send the image.</string>
+    <string name="sender_not_configured_image">Trilium Reading List Sender is not configured. Can\'t send the file.</string>
     <string name="sending_failed">Sending to Trilium failed.</string>
-    <string name="sending_image_complete_size">Image sent to Trilium. (%d KB)</string>
-    <string name="sender_not_configured_note">Trilium Sender is not configured. Can\'t compose note.</string>
+    <string name="sending_image_complete_size">File sent to Trilium. (%d KB)</string>
+    <string name="sender_not_configured_note">Trilium Reading List Sender is not configured. Can\'t compose note.</string>
     <string name="sending_note_complete">Note sent to Trilium.</string>
     <string name="sending_note_failed">Sending note to Trilium failed.</string>
     <string name="share_note_title">Shared from %s</string>

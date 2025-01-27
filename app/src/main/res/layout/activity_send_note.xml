@@ -10,17 +10,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/noteTitleEditText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text=""
-            android:hint="@string/note_title"
-            android:importantForAutofill="no" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/hasLinkCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/checkbox_include_url" />
+
+            <CheckBox
+                android:id="@+id/alreadyReadCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/checkbox_already_read" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/labelList"
@@ -29,17 +43,56 @@
             android:text="" />
 
         <EditText
-            android:id="@+id/noteContentEditText"
+            android:id="@+id/itemListEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:ems="10"
-            android:lines="10"
-            android:inputType="textMultiLine"
-            android:gravity="top"
-            android:layout_gravity="top"
-            android:hint="@string/note_text"
-            android:importantForAutofill="no" />
+            android:hint="@string/item_list"
+            android:inputType="text"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/itemSublistEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/item_sublist"
+            android:inputType="text"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/itemUrlEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/item_link"
+            android:inputType="text"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/itemTitleEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/item_title"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/itemAuthorEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="10"
+            android:ems="10"
+            android:hint="@string/item_author"
+            android:inputType="text" />
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

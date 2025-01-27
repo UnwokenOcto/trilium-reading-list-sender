@@ -1,4 +1,4 @@
-package io.github.zadam.triliumsender
+package io.github.unwokenocto.triliumlistsender
 
 import android.content.Intent
 import android.net.Uri
@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import io.github.zadam.triliumsender.services.ImageConverter
-import io.github.zadam.triliumsender.services.RequestBodyUtil
-import io.github.zadam.triliumsender.services.TriliumSettings
-import io.github.zadam.triliumsender.services.Utils
+import io.github.unwokenocto.triliumlistsender.services.ImageConverter
+import io.github.unwokenocto.triliumlistsender.services.RequestBodyUtil
+import io.github.unwokenocto.triliumlistsender.services.TriliumSettings
+import io.github.unwokenocto.triliumlistsender.services.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

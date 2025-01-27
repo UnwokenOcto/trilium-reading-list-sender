@@ -1,4 +1,4 @@
-package io.github.zadam.triliumsender.services
+package io.github.unwokenocto.triliumlistsender.services
 
 import okhttp3.MediaType
 import okhttp3.RequestBody

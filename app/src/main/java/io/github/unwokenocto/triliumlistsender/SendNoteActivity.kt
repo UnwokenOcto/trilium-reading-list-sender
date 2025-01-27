@@ -1,4 +1,4 @@
-package io.github.zadam.triliumsender
+package io.github.unwokenocto.triliumlistsender
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,9 +8,9 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import io.github.zadam.triliumsender.services.HtmlConverter
-import io.github.zadam.triliumsender.services.TriliumSettings
-import io.github.zadam.triliumsender.services.Utils
+import io.github.unwokenocto.triliumlistsender.services.HtmlConverter
+import io.github.unwokenocto.triliumlistsender.services.TriliumSettings
+import io.github.unwokenocto.triliumlistsender.services.Utils
 import kotlinx.android.synthetic.main.activity_send_note.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -61,7 +61,13 @@ class SendNoteActivity : AppCompatActivity() {
             // Since we want to be able to fire Toasts, we should use the Main (UI) scope.
             val uiScope = CoroutineScope(Dispatchers.Main)
             uiScope.launch {
-                val success = sendNote(noteTitleEditText.text.toString(), noteContentEditText.text.toString(), settings.triliumAddress, settings.apiToken)
+                val success = sendNote( itemListEditText.text.toString(),
+                                        itemSublistEditText.text.toString(),
+                                        itemUrlEditText.text.toString(),
+                                        itemTitleEditText.text.toString(),
+                                        itemAuthorEditText.text.toString(),
+                                        settings.triliumAddress,
+                                        settings.apiToken)
                 if (success) {
                     // Announce our success and end the activity.
                     Toast.makeText(this@SendNoteActivity, getString(R.string.sending_note_complete), Toast.LENGTH_LONG).show()
@@ -87,7 +93,7 @@ class SendNoteActivity : AppCompatActivity() {
         val suggestedSubject = intent.getStringExtra((Intent.EXTRA_SUBJECT))
         if (suggestedSubject != null && suggestedSubject.isNotEmpty()) {
             // Use suggested subject.
-            noteTitleEditText.setText(suggestedSubject, TextView.BufferType.EDITABLE)
+            itemListEditText.setText(suggestedSubject, TextView.BufferType.EDITABLE)
         } else {
             // Try to craft a sane default title.
             var referrerName = "Android"
@@ -112,10 +118,10 @@ class SendNoteActivity : AppCompatActivity() {
                 }
             }
             // Ultimately, set the note title.
-            noteTitleEditText.setText(getString(R.string.share_note_title, referrerName), TextView.BufferType.EDITABLE)
+            itemListEditText.setText(getString(R.string.share_note_title, referrerName), TextView.BufferType.EDITABLE)
         }
         // And populate the note body!
-        noteContentEditText.setText(intent.getStringExtra(Intent.EXTRA_TEXT), TextView.BufferType.EDITABLE)
+        itemSublistEditText.setText(intent.getStringExtra(Intent.EXTRA_TEXT), TextView.BufferType.EDITABLE)
     }
 
 
@@ -131,22 +137,24 @@ class SendNoteActivity : AppCompatActivity() {
      *
      * @return Success or failure, as a boolean.
      */
-    private suspend fun sendNote(noteTitle: String, noteText: String, triliumAddress: String, apiToken: String): Boolean {
+    private suspend fun sendNote(/*checkboxIncludeUrl: Boolean, checkboxAlreadyRead: Boolean,*/ itemList: String,
+                                 itemSublist: String,itemUrl: String, itemTitle: String, itemAuthor: String,
+                                 triliumAddress: String, apiToken: String): Boolean
+    {
         val tag = "SendNoteCoroutine"
         val settings = TriliumSettings(this)
 
         return withContext(Dispatchers.IO) {
             val client = OkHttpClient()
 
+            //Construct formatted content string to be interpreted by the Reading List Manager Trilium JS script
+            val contentString = "$itemList $itemSublist n $itemUrl $itemTitle - $itemAuthor"
+
+            // Construct JSON object to send
             val json = JSONObject()
 
-            if (noteTitle.isEmpty()) {
-                // API does not allow empty note titles, so use a default value if the user doesn't set one.
-                json.put("title", "Note from Android")
-            } else {
-                json.put("title", noteTitle)
-            }
-            json.put("content", HtmlConverter().convertPlainTextToHtml(noteText))
+            json.put("title", "Read")
+            json.put("content", HtmlConverter().convertPlainTextToHtml(contentString))
 
             if (settings.noteLabel.isNotEmpty()) {
                 // The api actually supports a list of key-value pairs, but for now we just write one label.

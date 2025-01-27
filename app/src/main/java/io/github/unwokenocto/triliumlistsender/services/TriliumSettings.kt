@@ -1,11 +1,11 @@
-package io.github.zadam.triliumsender.services
+package io.github.unwokenocto.triliumlistsender.services
 
 import android.app.Activity
 import android.content.Context
 
 class TriliumSettings constructor(ctx: Activity) {
     companion object {
-        const val PREF_NAME = "io.github.zadam.triliumsender.setup"
+        const val PREF_NAME = "io.github.unwokenocto.triliumlistsender.setup"
         const val PREF_TRILIUM_ADDRESS = "trilium_address"
         const val PREF_API_TOKEN = "api_token"
         const val PREF_NOTE_LABEL = "trilium_note_label"
