@@ -1,6 +1,7 @@
 # Trilium Reading List Sender
 Trilium Reading List Sender is a simple Android application for adding books, 
-articles, etc. to lists written on [TriliumNext Notes](https://github.com/TriliumNext/notes).
+articles, etc. to lists written on [TriliumNext Notes](https://github.com/TriliumNext/notes). 
+This should be compatible with the original Trilium, but it is untested.
 
 Lists cannot be viewed. This app only appends new items to your lists.
 
