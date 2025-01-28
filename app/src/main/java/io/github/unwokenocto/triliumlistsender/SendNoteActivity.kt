@@ -61,7 +61,9 @@ class SendNoteActivity : AppCompatActivity() {
             // Since we want to be able to fire Toasts, we should use the Main (UI) scope.
             val uiScope = CoroutineScope(Dispatchers.Main)
             uiScope.launch {
-                val success = sendNote( itemListEditText.text.toString(),
+                val success = sendNote( hasLinkCheckBox.isChecked,
+                                        alreadyReadCheckBox.isChecked,
+                                        itemListEditText.text.toString(),
                                         itemSublistEditText.text.toString(),
                                         itemUrlEditText.text.toString(),
                                         itemTitleEditText.text.toString(),
@@ -137,7 +139,7 @@ class SendNoteActivity : AppCompatActivity() {
      *
      * @return Success or failure, as a boolean.
      */
-    private suspend fun sendNote(/*checkboxIncludeUrl: Boolean, checkboxAlreadyRead: Boolean,*/ itemList: String,
+    private suspend fun sendNote(checkboxIncludeUrl: Boolean, checkboxAlreadyRead: Boolean, itemList: String,
                                  itemSublist: String,itemUrl: String, itemTitle: String, itemAuthor: String,
                                  triliumAddress: String, apiToken: String): Boolean
     {
@@ -148,7 +150,13 @@ class SendNoteActivity : AppCompatActivity() {
             val client = OkHttpClient()
 
             //Construct formatted content string to be interpreted by the Reading List Manager Trilium JS script
-            val contentString = "$itemList $itemSublist n $itemUrl $itemTitle - $itemAuthor"
+            val alreadyReadString = if (checkboxAlreadyRead) "y" else "n";
+            //val updatedUrlString = if (checkboxIncludeUrl) itemUrl else "none";
+            var updatedUrlString = itemUrl;
+            if (!checkboxIncludeUrl) {
+                updatedUrlString = "none";
+            }
+            val contentString = "$itemList $itemSublist $alreadyReadString $updatedUrlString $itemTitle - $itemAuthor"
 
             // Construct JSON object to send
             val json = JSONObject()
