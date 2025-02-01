@@ -5,6 +5,8 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +46,17 @@ class SendNoteActivity : AppCompatActivity() {
             labelList.visibility = View.GONE
         }
 
+        // Load List and Sublist presets from settings
+        /*val listPresetStrings = settings.listPresets.toString().split("\n");
+        val sublistPresetStrings = settings.sublistPresets.toString().split("\n");
+
+        val test = findViewById<AutoCompleteTextView>(R.id.itemListAutoCompleteTextView);
+        val listArrayAdapter = ArrayAdapter(this, R.layout.activity_send_note, listPresetStrings);
+        //itemListAutoCompleteTextView.setAdapter(listArrayAdapter);
+        test.setAdapter(listArrayAdapter);*/
+
+
+
         // If we're a share-intent, pre-populate the note.
         when (intent?.action) {
             Intent.ACTION_SEND -> {
@@ -63,8 +76,8 @@ class SendNoteActivity : AppCompatActivity() {
             uiScope.launch {
                 val success = sendNote( hasLinkCheckBox.isChecked,
                                         alreadyReadCheckBox.isChecked,
-                                        itemListEditText.text.toString(),
-                                        itemSublistEditText.text.toString(),
+                                        itemListAutoCompleteTextView.text.toString(),
+                                        itemSublistAutoCompleteTextView.text.toString(),
                                         itemUrlEditText.text.toString(),
                                         itemTitleEditText.text.toString(),
                                         itemAuthorEditText.text.toString(),
@@ -95,7 +108,7 @@ class SendNoteActivity : AppCompatActivity() {
         val suggestedSubject = intent.getStringExtra((Intent.EXTRA_SUBJECT))
         if (suggestedSubject != null && suggestedSubject.isNotEmpty()) {
             // Use suggested subject.
-            itemListEditText.setText(suggestedSubject, TextView.BufferType.EDITABLE)
+            itemListAutoCompleteTextView.setText(suggestedSubject, TextView.BufferType.EDITABLE)
         } else {
             // Try to craft a sane default title.
             var referrerName = "Android"
@@ -120,27 +133,32 @@ class SendNoteActivity : AppCompatActivity() {
                 }
             }
             // Ultimately, set the note title.
-            itemListEditText.setText(getString(R.string.share_note_title, referrerName), TextView.BufferType.EDITABLE)
+            itemListAutoCompleteTextView.setText(getString(R.string.share_note_title, referrerName), TextView.BufferType.EDITABLE)
         }
         // And populate the note body!
-        itemSublistEditText.setText(intent.getStringExtra(Intent.EXTRA_TEXT), TextView.BufferType.EDITABLE)
+        itemSublistAutoCompleteTextView.setText(intent.getStringExtra(Intent.EXTRA_TEXT), TextView.BufferType.EDITABLE)
     }
 
 
     /**
-     * Attempts to send a note to the Trilium server.
+     * Attempts to send a formatted note to the Trilium server.
      *
      * Runs in the IO thread, to avoid blocking the UI thread.
      *
-     * @param noteTitle, the title of the proposed note.
-     * @param noteText, the body of the proposed note.
+     * @param checkboxIncludeUrl, true if itemUrl should be replaced with "none".
+     * @param checkboxAlreadyRead, set to true if the item should be already checked off when sent to the list.
+     * @param itemList, the name of the note containing the desired list.
+     * @param itemSublist, the name of the header within the note at the top of the desired list.
+     * @param itemUrl, the URL of the item being added to the list.
+     * @param itemTitle, the title of the item being added to the list.
+     * @param itemAuthor, the author of the item being added to the list.
      * @param triliumAddress, the address of the Trilium server to send this note to.
      * @param apiToken, the security token for communicating with the Trilium server.
      *
      * @return Success or failure, as a boolean.
      */
     private suspend fun sendNote(checkboxIncludeUrl: Boolean, checkboxAlreadyRead: Boolean, itemList: String,
-                                 itemSublist: String,itemUrl: String, itemTitle: String, itemAuthor: String,
+                                 itemSublist: String, itemUrl: String, itemTitle: String, itemAuthor: String,
                                  triliumAddress: String, apiToken: String): Boolean
     {
         val tag = "SendNoteCoroutine"

@@ -46,7 +46,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onStop() {
         // Save edited label or address. Use apitoken from existing settings.
         val settings = TriliumSettings(this)
-        TriliumSettings(this@LoginActivity).save(triliumAddressEditText.text.toString(), settings.apiToken, labelEditText.text.toString())
+        TriliumSettings(this@LoginActivity).save(   triliumAddressEditText.text.toString(),
+                                                        settings.apiToken,
+                                                        labelEditText.text.toString(),
+                                                        listPresetsEditText.text.toString(),
+                                                        sublistPresetsEditText.text.toString()
+                                                     )
         super.onStop()
 
     }
@@ -72,6 +77,8 @@ class LoginActivity : AppCompatActivity() {
         val username = usernameEditText.text.toString()
         val password = passwordEditText.text.toString()
         val noteLabel = labelEditText.text.toString()
+        val listPresets = listPresetsEditText.text.toString()
+        val sublistPresets = sublistPresetsEditText.text.toString()
 
         // Check for an empty URL. Flag and abort if so.
         if (TextUtils.isEmpty(triliumAddress)) {
@@ -113,7 +120,7 @@ class LoginActivity : AppCompatActivity() {
 
             if (loginResult.success) {
                 // Store the address and api token.
-                TriliumSettings(this@LoginActivity).save(triliumAddress, loginResult.token!!, noteLabel)
+                TriliumSettings(this@LoginActivity).save(triliumAddress, loginResult.token!!, noteLabel, listPresets, sublistPresets)
                 // Announce our success.
                 Toast.makeText(this@LoginActivity, getString(R.string.connection_configured_correctly), Toast.LENGTH_LONG).show()
                 // End the activity.
@@ -209,6 +216,8 @@ class LoginActivity : AppCompatActivity() {
 
         // Always attempt to restore the note label.
         labelEditText.setText(settings.noteLabel)
+        listPresetsEditText.setText(settings.listPresets);
+        sublistPresetsEditText.setText(settings.sublistPresets);
 
         if (!settings.isConfigured()) {
             // Hide the logged-in indicator.

@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Trilium Reading List Sender</string>
     <string name="prompt_trilium_address">https://trilium_host:8080</string>
-    <string name="prompt_username">User name</string>
+    <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_label">Label for sent notes</string>
+    <string name="prompt_list_presets">List Presets (One per line)</string>
+    <string name="prompt_sublist_presets">Sublist Presets (One per line)</string>
     <string name="action_login">Login</string>
     <string name="action_login_short">Login</string>
     <string name="error_network_error">Network error</string>
@@ -32,6 +34,7 @@
     <string name="share_note_title">Shared from %s</string>
     <string name="login_settings_header">Login Settings</string>
     <string name="note_settings_header">Note Settings</string>
+    <string name="preset_settings_header">Preset Settings</string>
     <string name="label_preview_template">#%s</string>
     <string name="logged_in_successfully">Login credentials are saved! ✅</string>
     <string name="send_fab_content_desc">Send.</string>
